@@ -4,7 +4,7 @@ output "elbs_id" {
 }
 output "elbs_access_logs" {
   description = "Map of access_logs values across all elbs, keyed the same as var.elbs"
-  value       = { for k, v in aws_elb.elbs : k => v.access_logs if v.access_logs != null && length(v.access_logs) > 0 }
+  value       = { for k, v in aws_elb.elbs : k => one(v.access_logs) if v.access_logs != null && length(v.access_logs) > 0 }
 }
 output "elbs_arn" {
   description = "Map of arn values across all elbs, keyed the same as var.elbs"
@@ -36,7 +36,7 @@ output "elbs_dns_name" {
 }
 output "elbs_health_check" {
   description = "Map of health_check values across all elbs, keyed the same as var.elbs"
-  value       = { for k, v in aws_elb.elbs : k => v.health_check if v.health_check != null && length(v.health_check) > 0 }
+  value       = { for k, v in aws_elb.elbs : k => one(v.health_check) if v.health_check != null && length(v.health_check) > 0 }
 }
 output "elbs_idle_timeout" {
   description = "Map of idle_timeout values across all elbs, keyed the same as var.elbs"
